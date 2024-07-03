@@ -58,22 +58,25 @@ def login():
 # route uuden käyttäjän lisäämiseen
 @app.route('/adduser', methods=['POST'])
 def add_user():
-    #määritellään funktio käyttjän lisäämiseen tietokantaan, hashataan salasana
-    def create_user(kayttaja, salasana):
-        hashed_password = generate_password_hash(salasana, method='scrypt')
-        new_user = User(kayttaja=kayttaja, salasana=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-    # kuten aiemmin, vastaanotetaan data ja pilkotaan muuttujiin
     data = request.json
+    if not data:
+        return jsonify({'success': False, 'message': 'Dataa ei saatu'}), 400
+
     kayttaja = data.get('kayttaja')
     salasana = data.get('salasana')
-    # jos käyttäjänimi on jo käytössä annetaan ilmoitus
+
+    if not kayttaja or not salasana:
+        return jsonify({'success': False, 'message': 'Käyttäjänimi tai salasana puuttuu'}), 400
+
     existing_user = User.query.filter_by(kayttaja=kayttaja).first()
     if existing_user:
-        return jsonify({'success': False, 'message': 'Käyttäjänimi on jo käytössä'})
-    # jos estettä käyttäjätilin luomiselle ei ole, tehdään se
-    create_user(kayttaja, salasana)
+        return jsonify({'success': False, 'message': 'Käyttäjänimi on jo käytössä'}), 400
+
+    try:
+        create_user(kayttaja, salasana)
+    except Exception as e:
+        return jsonify({'success': False, 'message': 'Virhe tietokantaan lisäyksessä'}), 500
+
     return jsonify({'success': True, 'message': 'Käyttäjä lisätty onnistuneesti!'})
 # käyttäjätietojen haku
 @app.route('/userinfos', methods=['GET'])
@@ -126,8 +129,6 @@ def delete_user_info(info_id):
 # lisätään käyttäjän tiedot, eli uusi luotu salasana tiettyyn palveluun
 @app.route('/adduserinfo', methods=['POST'])
 def add_user_info():
-      
-
     # jälleen käytetään sessiota ja user_id:tä asioiden hallintaan eli loppupeleissä lisätään tiedot tietokantaan, jälleen hashataan salasana
     # pitää miettiä kaikkien tietojen kryptaamista...
     user_id = session.get('user_id')
@@ -171,6 +172,13 @@ def create_password(length):
             round +=1
 
         return(pwd)
+
+def create_user(kayttaja, salasana):
+    hashed_password = generate_password_hash(salasana, method='scrypt')
+    new_user = User(kayttaja=kayttaja, salasana=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+
 # name main
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

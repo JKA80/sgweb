@@ -10,7 +10,7 @@ function AddUser() {
     // luodaan kahva tietojen lähettämiseen backendille
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('/login', {
+        const response = await fetch('/addUser', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ kayttaja: username, salasana: password })
