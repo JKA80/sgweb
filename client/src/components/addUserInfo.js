@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LogoutButton from '../components/logoutButton';
 // uuden käyttäjän lisääminen
 function AddUserInfo() {
     // alustetaan arvojen käyttötilat
@@ -31,22 +32,18 @@ function AddUserInfo() {
         <div>
             <h1>Luo salasana</h1>
         <form onSubmit={handleSubmit}>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Tunnus" required />
+                <input type="text" className="text-input" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Tunnus" required />
             <br />
-                <input type="legnth" value={length} onChange={(e) => setLength(e.target.value)} placeholder="Pituus" required />
+                <input type="legnth" className="text-input" value={length} onChange={(e) => setLength(e.target.value)} placeholder="Pituus" required />
             <br />
-                <input type="text" value={target} onChange={(e) => setTarget(e.target.value)} placeholder="Kohde" required />
-            
+                <input type="text" className="text-input" value={target} onChange={(e) => setTarget(e.target.value)} placeholder="Kohde" required />
             <br />
-                <button type="submit">Vahvista</button>
+                <button type="submit" className="submit-button">Vahvista</button>
             <br />
             <br />
-                <h2>Hallitse salasanoja</h2>
-                <button onClick={() => navigate('/chooseTarget')}>Siirry</button>
-            
-            <br />
-
-            
+                <h1>Hallitse salasanoja</h1>
+                <button className="submit-button" onClick={() => navigate('/chooseTarget')}>Siirry</button>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+            <LogoutButton />         
 
         </form></div>
     );

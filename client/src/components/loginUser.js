@@ -28,21 +28,20 @@ function Login() {
     // lähetetään lomakkeen tiedot backendiin. Annetaan myös mahdollisuus siirtyä uuden tunnuksen luomiseen
     return (
         <div>
-            <h1>Kirjaudu sisään</h1>
+            <h1>SALASANAGENERAATTORI</h1>
         <form onSubmit={handleSubmit}>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Käyttäjänimi" required />
+                <input type="text" className="text-input" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Käyttäjänimi" required />
             <br />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Salasana" required />
+                <input type="password" className="text-input" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Salasana" required />
             <br />
             
-                <button type="submit">Kirjaudu sisään</button>
+                <button type="submit" className="submit-button">Kirjaudu sisään</button>
             <br />
             <br />
         
             
-                <button onClick={() => navigate('/adduser')}>Lisää uusi käyttäjä</button>
-            
-
+                <button className="submit-button" onClick={() => navigate('/adduser')}>Lisää uusi käyttäjä</button>
+              
             
         </form></div>
     );

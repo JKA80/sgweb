@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
-}
+/* app.css */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+body {background-color: #e1ecff;}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.submit-button {
+  background-color: #22b535;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.submit-button:hover {
+  background-color: #197425;
+}
+.logout-button {
+  background-color: #ff6666;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.logout-button:hover {
+  background-color: #ff3333;
+}
+
+
+.text-input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.text-input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  background-color: #fff;
+}
+.text-input:hover {
+  border-color: #888; 
+}
+
+.text-input::placeholder {
+  color: #888;
+}
+
+@media only screen and (max-width: 600px) {
+  .text-input {
+    width: 100%;
+    font-size: 14px;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media only screen and (min-width: 601px) {
+  .text-input {
+    width: 50%;
+    font-size: 16px;
   }
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 20px 0;
+  color: #2c3e50;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2em;
+    margin: 10px 0;
+  }
+}
+
+@media (min-width: 601px) {
+  h1 {
+    font-size: 3em;
+  }
+}
+
+li {
+  font-size: 20px;
 }

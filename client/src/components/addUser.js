@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 // kirjautuminen
 function AddUser() {
     // alustetaan arvojen käyttötilat
@@ -10,7 +11,7 @@ function AddUser() {
     // luodaan kahva tietojen lähettämiseen backendille
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('/addUser', {
+        const response = await fetch('/adduser', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ kayttaja: username, salasana: password })
@@ -30,13 +31,14 @@ function AddUser() {
             <h1>Luo uusi käyttäjä</h1>
         <form onSubmit={handleSubmit}>
             
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Käyttäjänimi" required />
+                <input type="text" className="text-input" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Käyttäjänimi" required />
             <br />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Salasana" required />
+                <input type="password" className="text-input" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Salasana" required />
             <br />
-                <button type="submit">Vahvista</button>
+                <button type="submit" className="submit-button">Vahvista</button>
+            <br/>
             <br />
-            <br />
+                <button className="logout-button" onClick={() => navigate('/')}>Palaa</button>
         
         </form></div>
     );

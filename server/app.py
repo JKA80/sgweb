@@ -60,22 +60,22 @@ def login():
 def add_user():
     data = request.json
     if not data:
-        return jsonify({'success': False, 'message': 'Dataa ei saatu'}), 400
+        return jsonify({'success': False, 'message': 'Dataa ei saatu'})
 
     kayttaja = data.get('kayttaja')
     salasana = data.get('salasana')
 
     if not kayttaja or not salasana:
-        return jsonify({'success': False, 'message': 'Käyttäjänimi tai salasana puuttuu'}), 400
+        return jsonify({'success': False, 'message': 'Käyttäjänimi tai salasana puuttuu'})
 
     existing_user = User.query.filter_by(kayttaja=kayttaja).first()
     if existing_user:
-        return jsonify({'success': False, 'message': 'Käyttäjänimi on jo käytössä'}), 400
+        return jsonify({'success': False, 'message': 'Käyttäjänimi on jo käytössä'})
 
     try:
         create_user(kayttaja, salasana)
     except Exception as e:
-        return jsonify({'success': False, 'message': 'Virhe tietokantaan lisäyksessä'}), 500
+        return jsonify({'success': False, 'message': 'Virhe tietokantaan lisäyksessä'})
 
     return jsonify({'success': True, 'message': 'Käyttäjä lisätty onnistuneesti!'})
 # käyttäjätietojen haku
@@ -124,7 +124,7 @@ def delete_user_info(info_id):
     db.session.delete(user_info)
     db.session.commit()
 
-    return jsonify({'success': True, 'message': 'Käyttäjän tiedot poistettu onnistuneesti!'})
+    return jsonify({'success': True, 'message': 'Tietue poistettu onnistuneesti!'})
   
 # lisätään käyttäjän tiedot, eli uusi luotu salasana tiettyyn palveluun
 @app.route('/adduserinfo', methods=['POST'])
@@ -147,7 +147,7 @@ def add_user_info():
     db.session.add(new_user_info)
     db.session.commit()
 
-    return jsonify({'success': True, 'message': 'Käyttäjän tiedot lisätty onnistuneesti!'})
+    return jsonify({'success': True, 'message': 'Salasana luotu onnistuneesti!'})
 # kirjaudu ulos eli lopeta sessio
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -164,7 +164,7 @@ def create_password(length):
         all_chars = caps + lows + specials + nums
 
         pwd = ""
-        length = 10
+        length = length
         round= 0
     
         while round < (length):

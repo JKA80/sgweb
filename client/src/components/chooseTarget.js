@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LogoutButton from '../components/logoutButton';
 
 // funktio missä valitaan, mitä tietuetta halutaan käsitellä
 const ChooseTarget = () => {
@@ -41,12 +42,17 @@ const ChooseTarget = () => {
         <ul>
           {userInfos.map(info => (
             <li key={info.id}>
-              {info.kohde}
-              <button onClick={() => handleSelectUserInfo(info)}>Valitse</button>
+              {info.kohde}&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+              <button className="submit-button" onClick={() => handleSelectUserInfo(info)}>Valitse</button>
             </li>
           ))}
         </ul>
       )}
+      <br />
+      <button className="logout-button"onClick={() => navigate('/adduserinfo')}>Palaa</button>
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+            <LogoutButton />
+            
     </div>
   );
 };

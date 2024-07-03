@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import LogoutButton from '../components/logoutButton';
 // tietueen ja salasanan käsittely
 const Dashboard = () => {
   const location = useLocation();
@@ -59,7 +60,7 @@ const Dashboard = () => {
       const data = await response.json();
       if (data.success) {
         alert('Tietue poistettu onnistuneesti!');
-        navigate('/choose-target');
+        navigate('/choosetarget');
       } else {
         alert('Tietueen poistaminen epäonnistui: ' + data.message);
       }
@@ -70,23 +71,28 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>{userInfo.kohde} - Tiedot</h1>
-      <button onClick={handlePasswordCopy}>Kopioi salasana leikepöydälle</button>
+      <h1>{userInfo.kohde}</h1>
+      <button className="submit-button" onClick={handlePasswordCopy}>Kopioi salasana leikepöydälle</button>
 
       <h2>Päivitä salasana</h2>
       <input
-        type="text"
+        type="text" className="text-input"
         placeholder="Salasanan pituus"
         value={length}
         onChange={handlePasswordChange}
       />
-      <button onClick={handlePasswordUpdate}>Päivitä salasana</button>
+      <br />
+      <button className="submit-button" onClick={handlePasswordUpdate}>Päivitä salasana</button>
 
       <h2>Poista tietue</h2>
-      <button onClick={handleDeleteUserInfo}>Poista</button>
+      <button className="logout-button" onClick={handleDeleteUserInfo}>Poista</button>
       <br />
-      <br/>
-      <button onClick={() => navigate('/choosetarget')}>Palaa</button>
+      <br />
+      <br />
+      <button className="logout-button"onClick={() => navigate('/choosetarget')}>Palaa</button>
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+            <LogoutButton />
+            
     </div>
   );
 };
